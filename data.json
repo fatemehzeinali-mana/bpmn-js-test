@@ -1,0 +1,226 @@
+
+
+{
+  "bpmn:definitions": {
+    "@xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL",
+    "@xmlns:bpmndi": "http://www.omg.org/spec/BPMN/20100524/DI",
+    "@xmlns:dc": "http://www.omg.org/spec/DD/20100524/DC",
+    "@xmlns:di": "http://www.omg.org/spec/DD/20100524/DI",
+    "@id": "Definitions_1",
+    "@targetNamespace": "http://bpmn.io/schema/bpmn",
+    "bpmn:process": [
+      {
+        "@id": "Process_1",
+        "@isExecutable": "false",
+        "bpmn:startEvent": {
+          "@id": "StartEvent_1",
+          "bpmn:outgoing": "Flow_1"
+        },
+        "bpmn:endEvent": {
+          "@id": "EndEvent_1"
+        },
+        "bpmn:sequenceFlow": {
+          "@id": "Flow_1",
+          "@sourceRef": "StartEvent_1",
+          "@targetRef": "EndEvent_1"
+        }
+      },
+      {
+        "@id": "Process_2",
+        "@isExecutable": "false",
+        "bpmn:startEvent": {
+          "@id": "StartEvent_2",
+          "bpmn:outgoing": "Flow_2"
+        },
+        "bpmn:task": {
+          "@id": "Task_1",
+          "bpmn:incoming": "Flow_2",
+          "bpmn:outgoing": "Flow_3"
+        },
+        "bpmn:endEvent": {
+          "@id": "EndEvent_2"
+        },
+        "bpmn:sequenceFlow": [
+          {
+            "@id": "Flow_2",
+            "@sourceRef": "StartEvent_2",
+            "@targetRef": "Task_1"
+          },
+          {
+            "@id": "Flow_3",
+            "@sourceRef": "Task_1",
+            "@targetRef": "EndEvent_2"
+          }
+        ]
+      },
+      {
+        "@id": "leaveRequestProcess",
+        "@isExecutable": "true",
+        "bpmn:startEvent": {
+          "@id": "startEvent",
+          "@name": "Start Process",
+          "bpmn:outgoing": "Flow_1"
+        },
+        "bpmn:userTask": [
+          {
+            "@id": "requestLeaveTask",
+            "@name": "Request Leave",
+            "bpmn:incoming": "Flow_1",
+            "bpmn:outgoing": "Flow_2"
+          },
+          {
+            "@id": "approveLeaveTask",
+            "@name": "Approve Leave",
+            "bpmn:incoming": "Flow_2",
+            "bpmn:outgoing": "Flow_3"
+          }
+        ],
+        "bpmn:endEvent": {
+          "@id": "endEvent",
+          "@name": "End Process",
+          "bpmn:incoming": "Flow_3"
+        },
+        "bpmn:sequenceFlow": [
+          {
+            "@id": "Flow_1",
+            "@sourceRef": "startEvent",
+            "@targetRef": "requestLeaveTask"
+          },
+          {
+            "@id": "Flow_2",
+            "@sourceRef": "requestLeaveTask",
+            "@targetRef": "approveLeaveTask"
+          },
+          {
+            "@id": "Flow_3",
+            "@sourceRef": "approveLeaveTask",
+            "@targetRef": "endEvent"
+          }
+        ]
+      }
+    ],
+    "bpmndi:BPMNDiagram": [
+      {
+        "@id": "BPMNDiagram_1",
+        "bpmndi:BPMNPlane": {
+          "@bpmnElement": "Process_1",
+          "bpmndi:BPMNShape": [
+            {
+              "@id": "StartEvent_1_di",
+              "@bpmnElement": "StartEvent_1",
+              "dc:Bounds": { "@x": "100", "@y": "100", "@width": "36", "@height": "36" }
+            },
+            {
+              "@id": "EndEvent_1_di",
+              "@bpmnElement": "EndEvent_1",
+              "dc:Bounds": { "@x": "300", "@y": "100", "@width": "36", "@height": "36" }
+            }
+          ],
+          "bpmndi:BPMNEdge": {
+            "@id": "Flow_1_di",
+            "@bpmnElement": "Flow_1",
+            "di:waypoint": [
+              { "@x": "136", "@y": "118" },
+              { "@x": "300", "@y": "118" }
+            ]
+          }
+        }
+      },
+      {
+        "@id": "BPMNDiagram_2",
+        "bpmndi:BPMNPlane": {
+          "@bpmnElement": "Process_2",
+          "bpmndi:BPMNShape": [
+            {
+              "@id": "StartEvent_2_di",
+              "@bpmnElement": "StartEvent_2",
+              "dc:Bounds": { "@x": "100", "@y": "200", "@width": "36", "@height": "36" }
+            },
+            {
+              "@id": "Task_1_di",
+              "@bpmnElement": "Task_1",
+              "dc:Bounds": { "@x": "200", "@y": "200", "@width": "36", "@height": "36" }
+            },
+            {
+              "@id": "EndEvent_2_di",
+              "@bpmnElement": "EndEvent_2",
+              "dc:Bounds": { "@x": "300", "@y": "200", "@width": "36", "@height": "36" }
+            }
+          ],
+          "bpmndi:BPMNEdge": [
+            {
+              "@id": "Flow_2_di",
+              "@bpmnElement": "Flow_2",
+              "di:waypoint": [
+                { "@x": "136", "@y": "218" },
+                { "@x": "200", "@y": "218" }
+              ]
+            },
+            {
+              "@id": "Flow_3_di",
+              "@bpmnElement": "Flow_3",
+              "di:waypoint": [
+                { "@x": "236", "@y": "218" },
+                { "@x": "300", "@y": "218" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "bpmndi:BPMNPlane": {
+          "@bpmnElement": "leaveRequestProcess",
+          "bpmndi:BPMNShape": [
+            {
+              "@id": "StartEvent_di",
+              "@bpmnElement": "startEvent",
+              "dc:Bounds": { "@x": "100", "@y": "150", "@width": "36", "@height": "36" }
+            },
+            {
+              "@id": "RequestLeaveTask_di",
+              "@bpmnElement": "requestLeaveTask",
+              "dc:Bounds": { "@x": "200", "@y": "130", "@width": "100", "@height": "50" }
+            },
+            {
+              "@id": "ApproveLeaveTask_di",
+              "@bpmnElement": "approveLeaveTask",
+              "dc:Bounds": { "@x": "350", "@y": "130", "@width": "100", "@height": "50" }
+            },
+            {
+              "@id": "EndEvent_di",
+              "@bpmnElement": "endEvent",
+              "dc:Bounds": { "@x": "500", "@y": "150", "@width": "36", "@height": "36" }
+            }
+          ],
+          "bpmndi:BPMNEdge": [
+            {
+              "@id": "Flow_1_di",
+              "@bpmnElement": "Flow_1",
+              "di:waypoint": [
+                { "@x": "136", "@y": "168" },
+                { "@x": "200", "@y": "168" }
+              ]
+            },
+            {
+              "@id": "Flow_2_di",
+              "@bpmnElement": "Flow_2",
+              "di:waypoint": [
+                { "@x": "236", "@y": "168" },
+                { "@x": "300", "@y": "168" }
+              ]
+            },
+            {
+              "@id": "Flow_3_di",
+              "@bpmnElement": "Flow_3",
+              "di:waypoint": [
+                { "@x": "436", "@y": "168" },
+                { "@x": "500", "@y": "168" }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+
